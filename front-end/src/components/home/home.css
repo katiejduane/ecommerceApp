@@ -1,0 +1,22 @@
+/* font-family: 'ZCOOL QingKe HuangYou', cursive;
+font-family: 'Laila', serif;
+font-family: 'Chonburi', cursive;
+font-family: 'Barlow', sans-serif;
+font-family: 'Sacramento', cursive;
+font-family: 'Josefin Slab', serif;
+font-family: 'Mali', cursive; */
+
+
+.home {
+    border: 2px dotted rgb(255, 255, 255);
+}
+
+.home img {
+    margin: 1rem auto;
+    
+}
+
+.carousel-horse {
+    height: 400px;
+    margin-bottom: 2rem;
+}
