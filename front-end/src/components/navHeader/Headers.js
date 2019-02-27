@@ -7,7 +7,7 @@ import './Nav.css'
 function Headers(props) {
     return (
         <div className="header">
-            <div className="container-fluid center blue">
+            <div className="container-fluid center red accent-2">
                 <div className="row">
                     <div className="container">
                         <LoginNavBar />

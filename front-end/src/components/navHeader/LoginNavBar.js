@@ -13,6 +13,7 @@
 
 import React, { Component } from 'react';
 import loginTab from '../../misc/openWindow';
+import { Link } from 'react-router-dom';
 
 class LoginNavBar extends Component{
     constructor(){
@@ -28,6 +29,7 @@ class LoginNavBar extends Component{
             <div className="login-nav-bar">
                 <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
                 <div className="right">MY CART 0 ITEM - $0.00
+                    <Link to="/login">Sign In</Link>or<Link to="/register">Register</Link>
             <button type="button" onClick={this.gitHubAuth} className="btn play-button btn-github">Login with github</button></div>
             </div>
         )

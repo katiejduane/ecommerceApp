@@ -11,7 +11,7 @@ function MiniNav(props) {
 
     return (
         <nav>
-            <div className="nav-wrapper blue">
+            <div className="nav-wrapper red accent-2">
                 <ul className="left hide-on-med-and-down">
                     <li><a href="sass.html">Horses</a></li>
                     <li><a href="badges.html">Riders</a></li>
