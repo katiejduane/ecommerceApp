@@ -12,14 +12,26 @@
 
 
 import React, { Component } from 'react';
+import loginTab from '../../misc/openWindow';
 
-function LoginNavBar(props) {
-    return (
-        <div className="login-nav-bar">
-            <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
-            <div className="right">MY CART 0 ITEM - $0.00
-            <button type="submit" className="btn play-button btn-github">Login with github</button></div>
-        </div>
-    )
+class LoginNavBar extends Component{
+    constructor(){
+        super()
+    }
+
+    gitHubAuth = (e)=>{
+        loginTab('http://localhost:3000/auth/github')
+    }
+
+    render(){
+        return (
+            <div className="login-nav-bar">
+                <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
+                <div className="right">MY CART 0 ITEM - $0.00
+            <button type="button" onClick={this.gitHubAuth} className="btn play-button btn-github">Login with github</button></div>
+            </div>
+        )
+    }
 }
+
 export default LoginNavBar;
