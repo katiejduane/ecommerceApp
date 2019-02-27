@@ -3,16 +3,27 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import authAction from '../../actions/authAction';
 import { connect } from 'react-redux';
+import SweetAlert from 'sweetalert-react';
+import 'sweetalert/dist/sweetalert.css';
 
 class Register extends Component {
     constructor(){
         super()
+        this.state = {
+            msg: "",
+            showAlert: false
+        }
     }
 
     componentWillReceiveProps(newProps){
         console.log(newProps)
         if(newProps.auth.msg === 'userExists'){
-
+            //let the moron know they already registered
+            this.setState({
+                showAlert: true
+            })
+        } else if (newProps.auth.msg === "userAdded") {
+            this.props.history.push('/')
         }
     }
     
@@ -31,8 +42,15 @@ class Register extends Component {
     }
 
     render() {
+        const msg = this.state.msg;
         return (
             <main>
+                <SweetAlert
+                    show={this.state.showAlert}
+                    title="Whoopsie Daisies"
+                    text="Email is already registered. Login or start over."
+                    onConfirm={() => this.setState({ showAlert: false })}
+                />
                 <center>
                     <div className="container">
                         <div className="z-depth-1 grey lighten-4 row login">

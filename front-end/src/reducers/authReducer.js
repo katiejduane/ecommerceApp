@@ -5,7 +5,8 @@
 
 export default (state = [], action) => {
     // signature takes state, which defaults to []
-    if (action.type === "AUTH_ACTION") {
+    console.log(action)
+    if ((action.type === "AUTH_ACTION") || (action.type === "LOGIN_ACTION")) {
         console.log(action.payload.data)
         return action.payload.data
     } else if (action.type === "LOGOUT") {

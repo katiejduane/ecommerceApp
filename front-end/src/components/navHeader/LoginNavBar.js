@@ -10,10 +10,10 @@
     // 7. It's now available in this promise resolution
     // 8. Put it in localstorage so we can use it next time.
 
-
 import React, { Component } from 'react';
 import loginTab from '../../misc/openWindow';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class LoginNavBar extends Component{
     constructor(){
@@ -25,15 +25,33 @@ class LoginNavBar extends Component{
     }
 
     render(){
+        console.log(this.props.auth)
+        let rightNavBar = "";
+        if(this.props.auth.username !== undefined){
+            //user is logged in!
+            rightNavBar = <span>Welcome, {this.props.auth.username} </span>
+        } else {
+            //user is not logged in
+            rightNavBar = <span>
+                <Link to="/login">Sign In</Link>or<Link to="/register">Register</Link>
+                <button type="button" onClick={this.gitHubAuth} className="btn play-button btn-github">Login with github</button>
+            </span>
+        }
         return (
             <div className="login-nav-bar">
                 <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
                 <div className="right">MY CART 0 ITEM - $0.00
-                    <Link to="/login">Sign In</Link>or<Link to="/register">Register</Link>
-            <button type="button" onClick={this.gitHubAuth} className="btn play-button btn-github">Login with github</button></div>
+                {rightNavBar}
+                </div>
             </div>
         )
     }
 }
 
-export default LoginNavBar;
+function mapStateToProps(state){
+    return{
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(LoginNavBar)
