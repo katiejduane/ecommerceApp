@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import './Horse.css';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import updateCart from '../../actions/updateCart';
 
 class Horse extends Component {
     constructor() {
         super()
         this.state = {
             horse: {}
-
         }
     }
 
     componentDidMount(){
-        console.log(this.props.match.params.id);
         const hid = this.props.match.params.id
         const horseResponse = axios.get(`${window.apiHost}/horses/${hid}`);
-        console.log(horseResponse)
         horseResponse.then((response) => {
             const horseData = response.data[0];
             console.log(horseData)
@@ -24,6 +24,18 @@ class Horse extends Component {
                 horse: horseData
             })
         })
+    }
+
+    componentWillReceiveProps(newProps){
+        if(newProps.cart.length !== this.props.cart.length){
+            //user just changed cart, onto homepage
+            this.props.history.push('/?added=item')
+        }
+    }
+
+    addToCart = (event)=>{
+        const token = this.props.auth.token
+        this.props.updateCart(token, this.state.horse.id)
     }
 
     render() {
@@ -54,7 +66,7 @@ class Horse extends Component {
                                 <input type="text" name="quantity" />
                             </div>
                             <div className="col s2">
-                                <button>ADD</button>
+                                <button onClick={this.addToCart}>Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -64,4 +76,17 @@ class Horse extends Component {
     }
 }
 
-export default Horse;
+function mapStateToProps(state){
+    return{
+        auth: state.auth,
+        cart: state.cart
+    }
+}
+
+function mapDispatchToProps(dispatcher){
+    return bindActionCreators({
+        updateCart: updateCart
+    }, dispatcher)
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Horse);

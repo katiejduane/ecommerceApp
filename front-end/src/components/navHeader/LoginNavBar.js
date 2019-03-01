@@ -39,7 +39,7 @@ class LoginNavBar extends Component{
         }
         return (
             <div className="login-nav-bar">
-                <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
+                <div className="left welcome-name"><Link to ="/">Welcome to Katie's Model Horse Emporium</Link></div>
                 <div className="right">MY CART 0 ITEM - $0.00
                 {rightNavBar}
                 <Link to="/cart"> items - $0.00</Link>
