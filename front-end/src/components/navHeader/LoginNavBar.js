@@ -42,6 +42,7 @@ class LoginNavBar extends Component{
                 <div className="left welcome-name">Welcome to Katie's Model Horse Emporium</div>
                 <div className="right">MY CART 0 ITEM - $0.00
                 {rightNavBar}
+                <Link to="/cart"> items - $0.00</Link>
                 </div>
             </div>
         )

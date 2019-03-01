@@ -14,12 +14,12 @@ function Carousel(props) {
     }
     return(
         <Slider {...settings}>
-            <div className="slick-image carousel-horse"><img src="/images/zena.jpg"></img></div>
-            <div className="slick-image carousel-horse"><img src="/images/roan_mustang.jpg"></img></div>
-            <div className="slick-image carousel-horse"><img src="/images/pelipa.jpg"></img></div>
-            <div className="slick-image carousel-horse"><img src="/images/morgan.jpg"></img></div>
-            <div className="slick-image carousel-horse"><img src="/images/grey_beauty.png"></img></div>
-            <div className="slick-image carousel-horse"><img src="/images/chestnut_quarterhorse.jpg"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/zena.jpg" alt="horse"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/roan_mustang.jpg" alt="horse"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/pelipa.jpg" alt="horse"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/morgan.jpg" alt="horse"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/grey_beauty.png" alt="horse"></img></div>
+            <div className="slick-image carousel-horse"><img src="/images/chestnut_quarterhorse.jpg" alt="horse"></img></div>
         </Slider>
     )
 }

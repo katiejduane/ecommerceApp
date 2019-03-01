@@ -2,12 +2,12 @@ import React from 'react';
 
 function MiniNav(props) {
 
-    const categories = [
-        'Horses',
-        'Riders',
-        'Stables',
-        'Accessories'
-    ]
+    // const categories = [
+    //     'Horses',
+    //     'Riders',
+    //     'Stables',
+    //     'Accessories'
+    // ]
 
     return (
         <nav>

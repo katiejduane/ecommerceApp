@@ -1,11 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-const pgp = require('pg-promise')();
-const config = require('../config');
-const connection = config.pg;
-const db = pgp(connection);
+const db = require('../database')
 const bcrypt = require('bcrypt-nodejs')
+const randToken = require('rand-token');
 
 
 /* GET home page. */
@@ -37,9 +35,16 @@ router.post('/register', (req, res, next) => {
   db.query(checkUserNameQuery, [req.body.username]).then((results)=>{
     // console.log(results)
     if(results.length === 0) {
-      const insertUserQuery = `INSERT INTO users (username) VALUES ($1);`;
-      db.query(insertUserQuery, [req.body.username]).then(()=>{
-        res.json({msg: "userAdded"})
+      // user does not exist, let's add them!
+      const insertUserQuery = `INSERT INTO users (username, password, token) VALUES ($1,$2,$3);`;
+      const token = randToken.uid(50);
+      //use bcrypt.hashSync to make their password something evil
+      const hash = bcrypt.hashSync(req.body.password)
+      db.query(insertUserQuery, [req.body.username, hash, token]).then(()=>{
+        res.json({
+          msg: "userAdded",
+          token: token,
+          username: req.body.username})
       })
     }else{
       //user exists!
@@ -51,6 +56,45 @@ router.post('/register', (req, res, next) => {
   //if not, insert username and hashed password
   //we'll also need to create a token
   // res.json(req.body)
+})
+
+router.post('/login', (req, res)=>{
+  const username = req.body.username;
+  const password = req.body.password;
+  // get the row with this username from postgres!
+  const selectUserQuery = `SELECT * FROM users WHERE username = $1`;
+  db.query(selectUserQuery, [username]).then((results)=>{
+    if (results.length === 0){
+      //these aren't the droids we're looking for, dummbies!
+      res.json({
+        msg:"badUser"
+      })
+    }else{
+      //user exists, so now check password
+      const checkHash = bcrypt.compareSync(password, results[0].password)
+      if (checkHash){
+        //match! create a new token!
+        const token = randToken.uid(50);
+        //update the db with the new token
+        const updateTokenQuery = `UPDATE users SET token = $1 WHERE username = $2`;
+        db.query(updateTokenQuery, [token, username]).catch((error)=>{
+          if(error){throw error};
+        });
+        res.json({
+          msg: 'loginSuccess',
+          token: token,
+          username: username
+        })
+      } else{
+        //bogus password!
+        res.json({
+          msg: "badPassword"
+        })
+      }
+    }
+  }).catch((error)=>{
+    if(error){throw error}
+  })
 })
 
 

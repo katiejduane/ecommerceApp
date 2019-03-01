@@ -8,7 +8,8 @@ import Home from './components/home/Home';
 import Headers from './components/navHeader/Headers';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
-
+import Horse from './components/pages/Horse'
+import Cart from './components/pages/Cart'
 
 class App extends Component {
   render() {
@@ -20,6 +21,8 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/horses/:id" component={Horse} />
+            <Route exact path="/cart" component={Cart} />
           </div>
         </div>
       </Router>

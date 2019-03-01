@@ -6,6 +6,9 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const horsesRouter = require('./routes/horses');
+const cartRouter = require('./routes/cart')
+
 var GitHubStrategy = require ('passport-github').Strategy;
 const config = require('./config')
 
@@ -57,5 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/horses', horsesRouter)
+app.use('/cart', cartRouter)
 
 module.exports = app;

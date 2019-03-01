@@ -1,0 +1,29 @@
+.horse-container{
+    background:#fff;
+    padding:35px 20px 20px;
+    margin:50px 0;
+}
+.horse-container h1{
+    font-family:'ZCOOL QingKe HuangYou',cursive;
+    font-size:5rem;
+}
+.horse-pic{
+    width:95%;
+}
+.horse-title, .horse-desc{
+    margin:0;
+}
+@media screen and (max-width:600px){
+    .horse-pic{
+        width:80%;
+    }
+    .horse-title{
+        margin-top:10px;
+    }
+}
+@media screen and (min-width:600px) and (max-width:1200px){
+    .horse-desc{
+        width:80%;
+        margin:0 auto;
+    }
+}
